@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/widgets.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <title>Blogging - Log In</title>
+</head>
+<body>
+    <div id="web-container">
+        <div id="wrapper">
+            <header>
+                <div id="brand">
+                    <a href="index.html">Blogging</a>
+                    
+                    <button onclick="navToggle()"><br><img src="img/nav-toggle.png" alt=""></button>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="my_posts.html">My Posts</a></li>
+                        <li><a href="about.html">About</a></li>
+                    </ul>
+                    <ul id="ul-userinfo">
+                        <li><a href="login.html" class="active-link">Login</a></li>
+                        <li><a href="register.html">Register</a></li>
+                    </ul>
+                </nav>
+                
+            </header>
+        
+            
+        
+            <main>
+                
+                <div class="main-content">
+                    <div class="alerts-area">
+                        <div class="alert hidden" id="validation-alert">
+                        </div>
+                    </div>
+                    <div class="main-content-blank">
+                        <h2 style="text-align:center;">Log In</h2>
+                        <div class="styled-hr"><div ></div></div>
+                        <div class="form-container login-form">
+                            <div class="form-item"><input type="text" name="username" id="username" placeholder="Username"/></div>
+        
+                            <div class="form-item"><input type="password" name="Password" id="password" placeholder="Password"/></div>
+        
+                            <div class="form-item"><input type="submit" name="submitBtn" value="LOG IN" class="button button-green   " onclick="formValidation()"/></div>
+                        </div>
+                    </div>
+                </div>
+                
+            </main>
+        </div>
+
+        <div id="footer">
+            <div>Copyright &copy;Blogging 2020 - All Rights Reserved</div>
+        </div>
+    </div>
+
+    <script src="js/loginCheck.js"></script>
+    <script>
+        // form validation - register form
+        var formElements = document.getElementsByClassName("login-form")[0].children;
+
+        console.log(formElements[0].getElementsByTagName("input")[0]);
+
+
+        
+        function formValidation() {
+            var valAlert = document.getElementById("validation-alert");
+            for (var i=0; i < formElements.length; i++) {
+                var currentInput = formElements[i].getElementsByTagName("input")[0];
+
+                if (currentInput.value == "") {
+                    valAlert.classList.add("alert-red");
+                    valAlert.classList.remove("hidden");
+                    valAlert.innerText = `'${currentInput.name} ' field is empty!`;
+                    break;
+                }
+                
+                else if (i == formElements.length - 1) {
+                    valAlert.classList.add("alert-green");
+                    valAlert.classList.remove("hidden");
+                    valAlert.innerText = 'You have succesfully logged in!';
+
+                    // after login
+                    var username = document.getElementById('username').value;
+                    userLoggedIn = true;
+                    userLoggedInAction(userLoggedIn, username);
+                    document.getElementsByClassName("main-content-blank")[0].classList.add("hidden");
+                    break;
+                }
+            }
+            // setTimeout(function() { valAlert.classList.add("hidden") },5000);
+        }
+
+    </script>
+
+    <script src="js/navScript.js"></script>
+</body>
+</html>

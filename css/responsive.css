@@ -1,0 +1,57 @@
+@media only screen and (max-width: 800px) {
+    header {
+        display: block;
+    }
+    
+    nav {
+        display: none;
+        flex-direction: column;
+        /* pasi qe te aktivizohet -display: flex;  me ane te javascriptit, flex-direction:column; do te jete aktiv per elementin 'nav' */
+    }
+    
+    nav ul {
+        width: 100%;
+        display: block;
+    }
+    
+    nav ul:nth-child(2) {
+        width: 100%;
+        display: block;
+    }
+
+
+    nav li h2 {
+        display: block;
+        border: 0px;
+
+    }
+    nav li{
+        display: block;
+        border-top: 1px solid rgb(230, 230, 230);
+        border-bottom: 1px solid rgb(230, 230, 230);
+        text-align: center;
+    }
+    nav li a{
+        margin: 0;
+        display: block;
+    }
+    
+
+    main {
+        flex-direction: column-reverse;
+        align-items: center;
+        
+    }
+
+    .sidebar {
+        width: 95%;
+    }
+    .main-content {
+        width: 95%;
+    }
+
+    #brand button{
+        display: inline;
+    }
+    
+}
