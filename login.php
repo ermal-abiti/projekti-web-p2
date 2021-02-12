@@ -41,12 +41,18 @@ require('parts/header.php');
         var valAlert = document.getElementById("validation-alert");
         for (var i=0; i < formElements.length; i++) {
             var currentInput = formElements[i].getElementsByTagName("input")[0];
-
-            if (currentInput.value == "") {
+            //regex for username /[a-zA-Z][a-zA-Z0-9-_]{3,32}/
+            console.log(currentInput);
+            if (currentInput.name=="username" && !(/[a-zA-Z][a-zA-Z0-9-_]{3,32}/.test(currentInput.value))) {
+                
                 valAlert.classList.add("alert-red");
                 valAlert.classList.remove("hidden");
                 valAlert.innerText = `'${currentInput.name} ' field is empty!`;
                 break;
+            }
+            //regex for password
+            else if () {
+
             }
             
             else if (i == formElements.length - 1) {

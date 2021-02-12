@@ -3,9 +3,24 @@ require('parts/header.php');
 ?>
         
 <div class="alerts-area">
+    <?php
+        if (isset($_GET['usernameExists'])){
+            echo '<div class="alert" id="validation-alert">
+            Username already exists!</div>';
+        }
+        else if (isset($_GET['emailExists'])){
+            echo '<div class="alert" id="validation-alert">
+            Email already exists!</div>';
+        }
+        else if (isset($_GET['userRegistered'])) {
+            echo '<div class="alert alert-green" id="validation-alert">
+            User registered successfully!</div>';
+        }
+    ?>
     <div class="alert hidden" id="validation-alert">
     </div>
 </div>
+
 
 <main>
     
@@ -14,19 +29,23 @@ require('parts/header.php');
         <div class="main-content-blank">
             <h2 style="text-align:center;">Register</h2>
             <div class="styled-hr"><div ></div></div>
-            <div class="form-container register-form">
-                <div class="form-item"><input type="text" name="username" id="username" placeholder="Username"/></div>
 
-                <div class="form-item"><input type="text" name="Email" id="email" placeholder="Email"/></div>
 
-                <div class="form-item"><input type="password" name="Password" id="password" placeholder="Password"/></div>
+            <form action="config/user_register.php" method="post">
+                <div class="form-container register-form">
+                <div class="form-item"><input type="text" name="username" id="username" pattern="^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{3,29}$" placeholder="Username" required/></div>
 
-                <div class="form-item"><input type="password" name="Repeat Password" id="repeat-password" placeholder="Repeat Password"/></div>
+                <div class="form-item"><input type="text" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" name="email" id="email" placeholder="Email" required/></div>
 
-                <div class="form-item"> <label for="birthday">Date of Birth:</label><input type="date" name="birthday" placeholder="Date of Birth"/></div>
+                <div class="form-item"><input type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$" name="password" id="password" placeholder="Password" required/></div>
 
-                <div class="form-item"><input type="submit" name="submitBtn" value="REGISTER" class="button button-yellow" onclick="formValidation()"/></div>
+
+                <div class="form-item"> <label for="birthday">Date of Birth:</label><input type="date" name="birthday" placeholder="Date of Birth" required/></div>
+
+                <div class="form-item"><input type="submit" name="register-btn" value="REGISTER" class="button button-yellow"/></div>
             </div>
+            </form>
+            
         </div>
     </div>
     
@@ -34,12 +53,6 @@ require('parts/header.php');
 
 <script>
     let listaPerUser = document.getElementById('ul-userinfo');
-    
-    let userLoggedIn = false;
-    if (userLoggedIn) {
-        listaPerUser.innerHTML = '<li><a href="#">My Profile: <b>user001</b></a></li> <li><a href="#" style="color:red;"><b>Log Out</b></a></li>';
-    }
-
 
     // form validation - register form
     var formElements = document.getElementsByClassName("register-form")[0].children;
@@ -48,44 +61,54 @@ require('parts/header.php');
 
 
     
-    function formValidation() {
-        var valAlert = document.getElementById("validation-alert");
-        for (var i=0; i < formElements.length; i++) {
-            var currentInput = formElements[i].getElementsByTagName("input")[0];
+    // function formValidation() {
+    //     var valAlert = document.getElementById("validation-alert");
+    //     for (var i=0; i < formElements.length; i++) {
+    //         var currentInput = formElements[i].getElementsByTagName("input")[0];
 
-            if (currentInput.value == "") {
-                valAlert.classList.add("alert-red");
-                valAlert.classList.remove("hidden");
-                valAlert.innerText = `'${currentInput.name} ' field is empty!`;
-                break;
-            }
-            else if (currentInput.id == "email" && !currentInput.value.includes("@")) {
-                valAlert.classList.add("alert-red");
-                valAlert.classList.remove("hidden");
-                valAlert.innerText = 'Invalid email address!';
-                break;
-            }
-            else if (currentInput.id == "password" && currentInput.value.length < 8) {
-                valAlert.classList.add("alert-red");
-                valAlert.classList.remove("hidden");
-                valAlert.innerText = 'Password should be longer than 8 characters!';
-                break;
-            }
-            else if (currentInput.id == "repeat-password" && currentInput.value != document.getElementById("password").value) {
-                valAlert.classList.add("alert-red");
-                valAlert.classList.remove("hidden");
-                valAlert.innerText = 'Passwords don\'t match';
-                break;
-            }
-            else if (i == formElements.length - 1) {
-                valAlert.classList.add("alert-green");
-                valAlert.classList.remove("hidden");
-                valAlert.innerText = 'You have successfully been registered as a BLOGGING user!';
-                break;
-            }
-        }
-        // setTimeout(function() { valAlert.classList.add("hidden") },5000);
-    }
+    //         if (currentInput.value == "") {
+    //             valAlert.classList.add("alert-red");
+    //             valAlert.classList.remove("hidden");
+    //             valAlert.innerText = `'${currentInput.name} ' field is empty!`;
+    //             break;
+    //         }
+
+    //         // username: /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{3,29}$/
+    //         else if (currentInput.id == "username" && !(/^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{3,29}$/.test(currentInput.value))) {
+    //             valAlert.classList.add("alert-red");
+    //             valAlert.classList.remove("hidden");
+    //             valAlert.innerText = 'Invalid username !';
+    //             break;
+    //         }
+    //         //regex: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+    //         else if (currentInput.id == "email" && !(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(currentInput.value))) {
+    //             valAlert.classList.add("alert-red");
+    //             valAlert.classList.remove("hidden");
+    //             valAlert.innerText = 'Invalid email address!';
+    //             break;
+    //         }
+
+    //         //regex: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/
+    //         else if (currentInput.id == "password" && !(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/.test(currentInput.value))) {
+    //             valAlert.classList.add("alert-red");
+    //             valAlert.classList.remove("hidden");
+    //             valAlert.innerText = 'Password should be longer than 8 characters and contain at least 1 uppercase letter and 1 number!';
+    //             break;
+    //         }
+
+    //         else if (currentInput.id == "repeat-password" && currentInput.value != document.getElementById("password").value) {
+    //             valAlert.classList.add("alert-red");
+    //             valAlert.classList.remove("hidden");
+    //             valAlert.innerText = 'Passwords don\'t match';
+    //             break;
+    //         }
+    //         else if (i == formElements.length - 1) {
+                
+    //             break;
+    //         }
+    //     }
+    //     // setTimeout(function() { valAlert.classList.add("hidden") },5000);
+    // }
 
 </script>
 
