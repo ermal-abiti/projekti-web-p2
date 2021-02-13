@@ -27,7 +27,7 @@ if (isset($_POST['post_btn']) && isset($_SESSION['userLoggedIn'])) {
         }
         
         if($file_size > 2097152){
-           $errors[]='File size must be excately 2 MB';
+           $errors[]='File size must be max 2 MB';
         }
         
         if(empty($errors)==true){

@@ -31,6 +31,11 @@ session_start();
                             }
                         ?>
                         <li><a href="about.php">About</a></li>
+                        <?php 
+                            if($_SESSION['privilege'] == 1) {
+                                echo '<li><a href="dashboard.php">DASHBOARD</a></li>';
+                            }
+                        ?>
                     </ul>
                     <ul id="ul-userinfo">
                     <?php

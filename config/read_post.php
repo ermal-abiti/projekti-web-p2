@@ -49,4 +49,14 @@ function readPostsByUser($conn, $user) {
     $posts = $result->fetch_all(MYSQLI_ASSOC);
     return $posts;
 }
+
+function getAllUsers($conn) {
+    $sql = "SELECT * FROM user_table";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+    $posts = $result->fetch_all(MYSQLI_ASSOC);
+    return $posts;
+}
 ?>
