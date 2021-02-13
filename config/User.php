@@ -62,4 +62,56 @@ class User {
     
 }
 
+
+
+
+
+class LoginUser {
+    private $username;
+    private $password;
+
+    public function __construct($username, $password){
+        $this->username = $username;
+        $this->password = $password;
+    }
+
+    public function authenticateUser($conn) {
+        $sql = "SELECT * FROM user_table WHERE username=?";
+        $stmt = mysqli_stmt_init($conn);
+
+        if (!mysqli_stmt_prepare($stmt, $sql)) {
+            return false;
+        }
+        else {
+            mysqli_stmt_bind_param($stmt, "s", $this->username);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+
+            if($row = mysqli_fetch_assoc($result)) {
+                $password_check = password_verify($this->password, $row['password']);
+                if (!$password_check){
+                    // header("Location:../login.php?wrongPassword=1");
+                    // exit();
+                    return false;
+                }
+                else if ($password_check) {
+                    session_start();
+                    $_SESSION['userLoggedIn'] = $row['username'];
+                    $_SESSION['userID'] = $row['user_id'];
+                    $_SESSION['privilege'] = $row['privilege'];
+                    
+                    return true;
+                }
+                // else {
+                //     return false;
+                // }
+            }
+            else {
+                return false;
+            }
+
+        }
+    }
+}
+
 ?>

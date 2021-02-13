@@ -26,8 +26,18 @@
                         <li><a href="about.php">About</a></li>
                     </ul>
                     <ul id="ul-userinfo">
-                        <li><a href="login.php">Login</a></li>
-                        <li><a href="register.php">Register</a></li>
+                    <?php 
+                    session_start();
+                        if(isset($_SESSION['userLoggedIn'])){
+                            echo '<li><a href="config/logout.php">Log Out: '. $_SESSION['userLoggedIn'] .' </a></li>';
+                        }
+                        else {
+                            echo '
+                            <li><a href="login.php">Login</a></li>
+                            <li><a href="register.php">Register</a></li>
+                            ';
+                        }
+                    ?>
                     </ul>
                 </nav>
         </header>

@@ -8,12 +8,15 @@ if(isset($_POST['register-btn'])) {
 
     if($current_user->checkIfUsernameExists($conn)) {
         header("Location:../register.php?usernameExists=1");
+        exit();
     }
     else if($current_user->checkIfEmailExists($conn)) {
         header("Location:../register.php?emailExists=1");
+        exit();
     }
     else if($current_user->registerUserInDB($conn)) {
         header("Location:../register.php?userRegistered=1");
+        exit();
     }
     else {
         echo "$conn->error";
@@ -22,6 +25,7 @@ if(isset($_POST['register-btn'])) {
 }
 else {
     header("Location:../register.php");
+    exit();
 }
 
 
