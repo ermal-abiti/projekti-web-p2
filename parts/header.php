@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,12 +25,15 @@
                 <nav>
                     <ul>
                         <li><a href="index.php">Home</a></li>
-                        <li><a href="my_posts.php">My Posts</a></li>
+                        <?php 
+                            if(isset($_SESSION['userLoggedIn'])) {
+                                echo '<li><a href="my_posts.php">My Posts</a></li>';
+                            }
+                        ?>
                         <li><a href="about.php">About</a></li>
                     </ul>
                     <ul id="ul-userinfo">
-                    <?php 
-                    session_start();
+                    <?php
                         if(isset($_SESSION['userLoggedIn'])){
                             echo '<li><a href="config/logout.php">Log Out: '. $_SESSION['userLoggedIn'] .' </a></li>';
                         }

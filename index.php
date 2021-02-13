@@ -2,7 +2,17 @@
 require('parts/header.php');
 ?>
 
-            
+<div class="alerts-area">
+    <?php
+        if (isset($_GET['postUploaded'])){
+            echo '<div class="alert alert-green" id="validation-alert">
+            Post was created successfully!</div>';
+        }
+        
+    ?>
+    <div class="alert hidden" id="validation-alert">
+    </div>
+</div>
 
 <main>
     

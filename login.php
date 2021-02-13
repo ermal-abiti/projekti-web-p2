@@ -15,8 +15,15 @@ if(isset($_SESSION['userLoggedIn'])) {
     
     <div class="main-content">
         <div class="alerts-area">
-            <div class="alert hidden" id="validation-alert">
-            </div>
+            <?php
+                if(isset($_GET['wrongData'])) {
+                    echo '
+                    <div class="alert alert-red" id="validation-alert">
+                        Either username or password is incorrect!
+                    </div>
+                    ';
+                }
+            ?>
         </div>
         <form action="config/user_login.php" method="post">
 

@@ -3,11 +3,11 @@ session_start();
 include_once('db_conn.php');
 
 class User {
-    public $username;
-    public $password;
-    public $email;
-    public $birthday;
-    public $privilege;
+    private $username;
+    private $password;
+    private $email;
+    private $birthday;
+    private $privilege;
 
     public function __construct($username, $password, $email, $birthday, $privilege){
         $this->username = $username;
