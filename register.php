@@ -52,12 +52,12 @@ require('parts/header.php');
 </main>
 
 <script>
-    let listaPerUser = document.getElementById('ul-userinfo');
+    // let listaPerUser = document.getElementById('ul-userinfo');
 
     // form validation - register form
-    var formElements = document.getElementsByClassName("register-form")[0].children;
+    // var formElements = document.getElementsByClassName("register-form")[0].children;
 
-    console.log(formElements[0].getElementsByTagName("input")[0]);
+    // console.log(formElements[0].getElementsByTagName("input")[0]);
 
 
     
