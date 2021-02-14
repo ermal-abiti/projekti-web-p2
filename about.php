@@ -1,12 +1,29 @@
 <?php 
 require('parts/header.php');
 ?>
-        
-<!-- <div class="alerts-area">
-    <div class="alert alert-green">
-        this is a message
+
+
+<div class="slideshow">
+    
+
+    <div class="slideshow-img">
+        <img src="img/slider_img/Pic1.png" alt="slider_img1" id="sliderImg1">
     </div>
-</div> -->
+
+    <div class="slideshow-img hidden">
+        <img src="img/slider_img/Pic2.png" alt="slider_img1" id="sliderImg2">
+    </div>
+
+    <div class="slideshow-img hidden">
+        <img src="img/slider_img/Pic3.png" alt="slider_img1" id="sliderImg3">
+    </div>
+
+</div>
+<div class="slideshow-btn">
+        <button class="button button-red" id="leftBtnSlider"><</button>
+        <button class="button button-red" id="rightBtnSlider">></button>
+</div>
+<script src="js/slider.js"></script>
 
 <main>
     
