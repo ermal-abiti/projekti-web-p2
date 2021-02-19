@@ -11,8 +11,36 @@ var sliderTurnLeft = imgCount - 1;
 // current image index of array
 var currentImage = 0;
 
-console.log(sliderImgs);
-leftBtn.addEventListener('click', function(){
+
+
+function nextSlide(){
+    if (sliderTurnRight == imgCount - 1) {
+        sliderImgs[sliderTurnRight].classList.remove('hidden');
+        sliderImgs[currentImage].classList.add('hidden');
+        currentImage = sliderTurnRight;
+        sliderTurnRight = 0;
+        
+        sliderTurnLeft = currentImage - 1;
+        if (sliderTurnLeft < 0) {
+            sliderTurnLeft = imgCount - 1;
+        }
+    }
+    else {
+        
+        sliderImgs[sliderTurnRight].classList.remove('hidden');
+        sliderImgs[currentImage].classList.add('hidden');
+        currentImage = sliderTurnRight;
+        sliderTurnRight = sliderTurnRight + 1;
+        
+        sliderTurnLeft = currentImage - 1;
+        if (sliderTurnLeft < 0) {
+            sliderTurnLeft = imgCount - 1;
+        }
+        
+    }
+}
+
+function previousSlide(){
     if (sliderTurnLeft == 0) {
         sliderImgs[sliderTurnLeft].classList.remove('hidden');
         sliderImgs[currentImage].classList.add('hidden');
@@ -37,32 +65,7 @@ leftBtn.addEventListener('click', function(){
         }
 
     } 
-});
+}
 
-//slider right button
-rightBtn.addEventListener('click', function(){
-    if (sliderTurnRight == imgCount - 1) {
-        sliderImgs[sliderTurnRight].classList.remove('hidden');
-        sliderImgs[currentImage].classList.add('hidden');
-        currentImage = sliderTurnRight;
-        sliderTurnRight = 0;
-
-        sliderTurnLeft = currentImage - 1;
-        if (sliderTurnLeft < 0) {
-            sliderTurnLeft = imgCount - 1;
-        }
-    }
-    else {
-        
-        sliderImgs[sliderTurnRight].classList.remove('hidden');
-        sliderImgs[currentImage].classList.add('hidden');
-        currentImage = sliderTurnRight;
-        sliderTurnRight = sliderTurnRight + 1;
-
-        sliderTurnLeft = currentImage - 1;
-        if (sliderTurnLeft < 0) {
-            sliderTurnLeft = imgCount - 1;
-        }
-
-    } 
-});
+rightBtn.addEventListener('click', nextSlide);
+leftBtn.addEventListener('click', previousSlide);
