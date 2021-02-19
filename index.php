@@ -68,11 +68,16 @@ require('config/read_post.php');
         </div>
 
         <div class="sidebar-content">
-            <h2>2020 Posts</h2>
+            <h2>Recents</h2>
             <div class="styled-hr"><div></div></div>
             <ul>
-                <li><a href="posts/post1.html">PHP’s Dependency Manager</a></li>
-                <li><a href="posts/post2.html">Gjuha Programuese Python</a></li>
+                <?php
+                    foreach($posts as $post) {
+                ?>
+                <li><a href="post_by_id.php?postID=<?php echo $post['post_id']; ?>"><?php echo $post['post_title'];?></a></li>
+                <?php
+                    }
+                ?>
             </ul>
         </div>
     </div>

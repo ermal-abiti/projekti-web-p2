@@ -14,8 +14,14 @@ function getUserById($conn,$id) {
         while ($row = $result->fetch_assoc()){
             return $row['username'];
         }
+        $stmt->close();
     }
-    $stmt->close();
+    else {
+        $stmt->close();
+        header("Location:object_not_found.php");
+    }
+    
+    
 }
 
 function readAllPosts($conn) {
@@ -36,6 +42,11 @@ function readPostById($conn, $id) {
 
     $result = $stmt->get_result();
     $post = $result->fetch_assoc();
+
+    if (!$post) {
+        header("Location:object_not_found.php");
+        exit();
+    }
     return $post;
 }
 

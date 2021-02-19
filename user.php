@@ -20,7 +20,7 @@ if (!isset($_GET['userID'])){
             <h2 class="mcb-item">
                 <?php
                 echo getUserById($conn,$_GET['userID']); 
-                if ($_GET['userID'] == $_SESSION['userID']) {
+                if (isset($_SESSION['userID']) && $_GET['userID'] == $_SESSION['userID']) {
                     echo '(YOU)';
                 }
             ?></h2>
