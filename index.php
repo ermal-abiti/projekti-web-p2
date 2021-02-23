@@ -1,4 +1,5 @@
 <?php 
+session_start();
 require('parts/header.php');
 require('config/db_conn.php');
 require('config/read_post.php');
@@ -60,11 +61,18 @@ require('config/read_post.php');
             </div>
             
             <div class="styled-hr"><div></div></div>
-            
-            <div class="action-widgets">
-                <a class="button button-blue" href="create_post.php">Create a Post</a>
-                <a class="button button-red">Embed a Video</a>
-            </div>
+
+            <?php if(isset($_SESSION['userLoggedIn'])) {?>
+                <div class="action-widgets">
+                    <a class="button button-blue" href="create_post.php">Create a Post</a>
+                    <a class="button button-red">Embed a Video</a>
+                </div>
+            <?php
+                }
+                else {
+                    echo '<p><a href="login.php">Log In</a> to add content!</p>';
+                }
+            ?>
         </div>
 
         <div class="sidebar-content">
